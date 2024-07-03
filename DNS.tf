@@ -1,6 +1,6 @@
 resource "aws_route53_record" "strapi" {
-  zone_id = "Z06607023RJWXGXD2ZL6M"
-  name    = "haripriyagh13.contentecho.in"
+  zone_id = var.route53_zone_id
+  name    = var.domain_name
   type    = "A"
 
   alias {

@@ -9,7 +9,7 @@ resource "aws_ecs_task_definition" "strapiTD" {
   container_definitions = jsonencode([
     {
       name      = "main-container"
-      image     = "priya247/strapidocker:latest"
+      image     = var.docker_image
       essential = true
       portMappings = [
         {

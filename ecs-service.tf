@@ -1,6 +1,6 @@
 resource "aws_ecs_service" "nodeapp" {
   name                               = "strapi-app"
-  launch_type                        = "FARGATE"
+  #launch_type                        = "FARGATE"
   platform_version                   = "LATEST"
   cluster                            = aws_ecs_cluster.strapiECS.id
   task_definition                    = aws_ecs_task_definition.strapiTD.arn
@@ -8,6 +8,11 @@ resource "aws_ecs_service" "nodeapp" {
   deployment_minimum_healthy_percent = 100
   deployment_maximum_percent         = 200
   desired_count                      = 1
+
+  capacity_provider_strategy {
+    capacity_provider = "FARGATE_SPOT"
+    weight            = 1
+  }
 
   depends_on = [aws_lb_listener.Listener, aws_iam_role.iam-role]
 
